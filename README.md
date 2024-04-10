@@ -1,29 +1,24 @@
-# 黑马学成在线项目
+# 黑马学成在线项目  这是后端项目
 - 技术栈：Nginx、SpringBoot、Spring Cloud、Spring Security、MinIO、MyBatis-Plus、MQ、Redis、Elasticsearch
-- 共分为七个模块
 
-## 前端资源：
-网盘链接：https://pan.baidu.com/s/1XSdezXLuC3UdaxAqjjJ2wg?pwd=2077 提取码：2077
 
-## 项目基础环境搭建：
-- 对应的文章地址：https://cyborg2077.github.io/2023/01/29/XuechengOnlinePart1/
-## 内容管理模块（含实战内容）
-- 对应的文章地址：https://cyborg2077.github.io/2023/02/02/XuechengOnlinePart2/
-- 前置知识SpringCloud的相关笔记：https://cyborg2077.github.io/2022/11/08/SpringCloud/
+## 内容管理模块
+- 这部分主要实现了课程管理（课程内容的CRUD 课程计划的CRUD 课程营销的CRUD）、课程查询、课程分类等功能
+- 
 ## 媒资管理模块
-- 这部分采用MinIO构建分布式文件系统
-- 对应的文章地址：https://cyborg2077.github.io/2023/02/10/XuechengOnlinePart3/
+- 这部分采用MinIO构建分布式文件系统 也可替换成第三方存储服务 如OSS
+- 这部分主要实现了小文件上传、视频预览、视频转码、视频分片上传、视频分片合并，采用了XXL-JOB分布式任务调度查询视频处理任务表进行视频处理
 ## 课程发布模块
-- 对应的文章地址：https://cyborg2077.github.io/2023/02/28/XuechengOnlinePart4/
-- 这部分最后还用到了ElasticSearch完成搜索结果高亮，但是课程中讲的不是很详细，我的博客中也有详细介绍ElasticSearch的笔记：https://cyborg2077.github.io/2022/12/24/ElasticSearch/
-## 认证授权模块（含实战内容，解决微信登录）
-- 对应的文章地址：https://cyborg2077.github.io/2023/03/08/XuechengOnlinePart5/
+- 这部分主要实现课程发布、课程预览、课程审核等功能，课程预览设计到Freemarker生成静态化页面后上传到文件系统，
+课程发布涉及到分布式事务，需要课程发布后将课程发布信息缓存到redis中，课程查询信息添加到ElasticSearch索引库里，将静态页面上传。
+仍然通过XXL-Job扫描 消息表 同时在表里设置小阶段状态保证幂等性 唯一性 
+## 课程搜索模块
+- 这部分主要实现课程索引库的添加、修改、删除，课程搜索功能
+
+## 认证授权模块（微信登录）
+- 这部分主要实现各个微服务之间的单点登录，实现用户的登录注册等
+
 ## 选课学习模块
 - 这部分还接入了支付宝的沙箱支付环境，可以模拟真实的用户扫码支付
 - 支付结果也支持基于RabbitMQ实现异步消息通知处理 
-- 对应的文章地址：https://cyborg2077.github.io/2023/03/17/XuechengOnlinePart6/
-- RabbitMQ的前置知识也可以参阅我这篇文章：https://cyborg2077.github.io/2022/12/22/MeassageQueue/
-## 项目优化
-- 这部分主要是用Redis来缓存一些热点数据，粗略介绍了一点缓存穿透、缓存雪崩、缓存击穿和分布式锁的实现
-- 对应的文章地址：https://cyborg2077.github.io/2023/03/23/XuechengOnlinePart7/
-- 但是这里的Redis讲解很潦草，建议看我这篇文章深入学习一下Redis：https://cyborg2077.github.io/2022/10/22/RedisPractice/
+
